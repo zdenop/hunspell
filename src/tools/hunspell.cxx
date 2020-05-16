@@ -2112,9 +2112,6 @@ int main(int argc, char** argv) {
         gettext(
             "AVAILABLE DICTIONARIES (path is not mandatory for -d option):\n"));
     search(path, NULL, NULL);
-    if (-1 == arg_files) {
-      exit(0);
-    }
   }
 
   if (!privdicname)
@@ -2160,6 +2157,10 @@ int main(int argc, char** argv) {
                             "dictionary named \"%s\".\n"),
             dicname);
     exit(1);
+  }
+
+  if (-1 == arg_files) {
+      exit(0);
   }
 
   /* open the private dictionaries */
