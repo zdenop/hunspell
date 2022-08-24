@@ -95,3 +95,11 @@ hunspell-*.tar.gz
 
 #MSVC
 /msvc/Hunspell.VC.VC.opendb
+msvc/Win32
+msvc/.vs
+msvc/Report*
+
+#cmake
+build
+build64
+*.patch

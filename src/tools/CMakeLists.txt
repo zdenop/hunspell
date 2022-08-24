@@ -194,37 +194,36 @@ set_target_properties(${HUNSPELL_TOOLS_HUNZIP_TARGET} PROPERTIES
     FOLDER       ${HUNSPELL_TOOLS_TARGET_PREFIX}
 )
 
-if((NOT WIN32) OR MINGW)
-    # ~~~ Hzip target
-    add_executable(${HUNSPELL_TOOLS_HZIP_TARGET} hzip.cxx)
+# ~~~ Hzip target
+add_executable(${HUNSPELL_TOOLS_HZIP_TARGET} hzip.cxx)
 
-    set_target_properties(${HUNSPELL_TOOLS_HZIP_TARGET} PROPERTIES
-        OUTPUT_NAME  ${HUNSPELL_TOOLS_OUTPUT_PREFIX}${_HZIP_OUTPUT_NAME}
-        FOLDER       ${HUNSPELL_TOOLS_TARGET_PREFIX}
-    )
+set_target_properties(${HUNSPELL_TOOLS_HZIP_TARGET} PROPERTIES
+    OUTPUT_NAME  ${HUNSPELL_TOOLS_OUTPUT_PREFIX}${_HZIP_OUTPUT_NAME}
+    FOLDER       ${HUNSPELL_TOOLS_TARGET_PREFIX}
+)
 
-    # ~~~ Munch target
-    add_executable(${HUNSPELL_TOOLS_MUNCH_TARGET} munch.cxx)
+# ~~~ Munch target
+add_executable(${HUNSPELL_TOOLS_MUNCH_TARGET} munch.cxx)
 
-    target_include_directories(${HUNSPELL_TOOLS_MUNCH_TARGET}
-        PRIVATE  ${CMAKE_CURRENT_SOURCE_DIR}
-    )
-    set_target_properties(${HUNSPELL_TOOLS_MUNCH_TARGET} PROPERTIES
-        OUTPUT_NAME  ${HUNSPELL_TOOLS_OUTPUT_PREFIX}${_MUNCH_OUTPUT_NAME}
-        FOLDER       ${HUNSPELL_TOOLS_TARGET_PREFIX}
-    )
+target_include_directories(${HUNSPELL_TOOLS_MUNCH_TARGET}
+    PRIVATE  ${CMAKE_CURRENT_SOURCE_DIR}
+)
+set_target_properties(${HUNSPELL_TOOLS_MUNCH_TARGET} PROPERTIES
+    OUTPUT_NAME  ${HUNSPELL_TOOLS_OUTPUT_PREFIX}${_MUNCH_OUTPUT_NAME}
+    FOLDER       ${HUNSPELL_TOOLS_TARGET_PREFIX}
+)
 
-    # ~~~ Unmunch target
-    add_executable(${HUNSPELL_TOOLS_UNMUNCH_TARGET} unmunch.cxx)
+# ~~~ Unmunch target
+add_executable(${HUNSPELL_TOOLS_UNMUNCH_TARGET} unmunch.cxx)
 
-    target_include_directories(${HUNSPELL_TOOLS_UNMUNCH_TARGET}
-        PRIVATE  ${CMAKE_CURRENT_SOURCE_DIR}
-    )
-    set_target_properties(${HUNSPELL_TOOLS_UNMUNCH_TARGET} PROPERTIES
-        OUTPUT_NAME  ${HUNSPELL_TOOLS_OUTPUT_PREFIX}${_UNMUNCH_OUTPUT_NAME}
-        FOLDER       ${HUNSPELL_TOOLS_TARGET_PREFIX}
-    )
-endif()
+target_include_directories(${HUNSPELL_TOOLS_UNMUNCH_TARGET}
+    PRIVATE  ${CMAKE_CURRENT_SOURCE_DIR}
+)
+set_target_properties(${HUNSPELL_TOOLS_UNMUNCH_TARGET} PROPERTIES
+    OUTPUT_NAME  ${HUNSPELL_TOOLS_OUTPUT_PREFIX}${_UNMUNCH_OUTPUT_NAME}
+    FOLDER       ${HUNSPELL_TOOLS_TARGET_PREFIX}
+)
+
 # ---------------------------------------------------------------------------- #
 
 
