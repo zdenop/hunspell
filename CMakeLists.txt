@@ -1,6 +1,6 @@
 # ---------------------------------------------------------------------------- #
 cmake_minimum_required(VERSION 3.13)
-project(hunspell VERSION 1.7.0)
+project(hunspell VERSION 1.7.1)
 
 # ~~~ Options
 option(HUNSPELL_BUILD_TOOLS       "Build Hunspell tools and parser."  ON)
