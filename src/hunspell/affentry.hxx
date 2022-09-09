@@ -94,22 +94,26 @@ class PfxEntry : public AffEntry {
   explicit PfxEntry(AffixMgr* pmgr);
 
   bool allowCross() const { return ((opts & aeXPRODUCT) != 0); }
-  struct hentry* checkword(const char* word,
+  struct hentry* checkword(const std::string& word,
+                           int start,
                            int len,
                            char in_compound,
                            const FLAG needflag = FLAG_NULL);
 
-  struct hentry* check_twosfx(const char* word,
+  struct hentry* check_twosfx(const std::string& word,
+                              int start,
                               int len,
                               char in_compound,
                               const FLAG needflag = FLAG_NULL);
 
-  std::string check_morph(const char* word,
+  std::string check_morph(const std::string& word,
+                          int start,
                           int len,
                           char in_compound,
                           const FLAG needflag = FLAG_NULL);
 
-  std::string check_twosfx_morph(const char* word,
+  std::string check_twosfx_morph(const std::string& word,
+                                 int start,
                                  int len,
                                  char in_compound,
                                  const FLAG needflag = FLAG_NULL);
@@ -136,7 +140,7 @@ class PfxEntry : public AffEntry {
   inline void setFlgNxt(PfxEntry* ptr) { flgnxt = ptr; }
 
   inline char* nextchar(char* p);
-  inline int test_condition(const char* st);
+  inline int test_condition(const std::string& st);
 };
 
 /* A Suffix Entry */
@@ -163,7 +167,8 @@ class SfxEntry : public AffEntry {
   explicit SfxEntry(AffixMgr* pmgr);
 
   bool allowCross() const { return ((opts & aeXPRODUCT) != 0); }
-  struct hentry* checkword(const char* word,
+  struct hentry* checkword(const std::string& word,
+                           int start,
                            int len,
                            int optflags,
                            PfxEntry* ppfx,
@@ -171,13 +176,15 @@ class SfxEntry : public AffEntry {
                            const FLAG needflag,
                            const FLAG badflag);
 
-  struct hentry* check_twosfx(const char* word,
+  struct hentry* check_twosfx(const std::string& word,
+                              int start,
                               int len,
                               int optflags,
                               PfxEntry* ppfx,
                               const FLAG needflag = FLAG_NULL);
 
-  std::string check_twosfx_morph(const char* word,
+  std::string check_twosfx_morph(const std::string& word,
+                                 int start,
                                  int len,
                                  int optflags,
                                  PfxEntry* ppfx,

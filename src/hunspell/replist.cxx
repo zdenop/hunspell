@@ -77,7 +77,7 @@
 #include "csutil.hxx"
 
 RepList::RepList(int n) {
-  dat.reserve(n);
+  dat.reserve(std::min(n, 16384));
 }
 
 RepList::~RepList() {
@@ -105,11 +105,9 @@ int RepList::find(const char* word) {
   return ret;
 }
 
-std::string RepList::replace(const char* word, int ind, bool atstart) {
+std::string RepList::replace(const size_t wordlen, int ind, bool atstart) {
   int type = atstart ? 1 : 0;
-  if (ind < 0)
-    return std::string();
-  if (strlen(word) == dat[ind]->pattern.size())
+  if (wordlen == dat[ind]->pattern.size())
     type = atstart ? 3 : 2;
   while (type && dat[ind]->outstrings[type].empty())
     type = (type == 2 && !atstart) ? 0 : type - 1;
@@ -171,14 +169,24 @@ bool RepList::conv(const std::string& in_word, std::string& dest) {
   bool change = false;
   for (size_t i = 0; i < wordlen; ++i) {
     int n = find(word + i);
-    std::string l = replace(word + i, n, i == 0);
-    if (!l.empty()) {
-      dest.append(l);
-      i += dat[n]->pattern.size() - 1;
-      change = true;
-    } else {
+
+    bool empty = n < 0;
+    if (empty) {
       dest.push_back(word[i]);
+      continue;
     }
+
+    std::string l = replace(wordlen - i, n, i == 0);
+    if (l.empty()) {
+      dest.push_back(word[i]);
+      continue;
+    }
+
+    dest.append(l);
+    if (!dat[n]->pattern.empty()) {
+      i += dat[n]->pattern.size() - 1;
+    }
+    change = true;
   }
 
   return change;
