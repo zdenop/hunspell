@@ -1539,6 +1539,9 @@ std::vector<std::string> HunspellImpl::stem(const std::vector<std::string>& desc
   if (desc.empty())
     return slst;
   for (const auto& i : desc) {
+    if (result2.size() > MAXMORPHRESULT)
+      break;
+
     std::string result;
 
     // add compound word parts (except the last one)
@@ -1549,6 +1552,9 @@ std::vector<std::string> HunspellImpl::stem(const std::vector<std::string>& desc
     }
     std::vector<std::string> pl = line_tok(tok, MSEP_ALT);
     for (auto& k : pl) {
+      if (result2.size() > MAXMORPHRESULT)
+        break;
+
       // add derivational suffixes
       if (k.find(MORPH_DERI_SFX) != std::string::npos) {
         // remove inflectional suffixes
@@ -1664,6 +1670,8 @@ struct cs_info* HunspellImpl::get_csconv() {
 }
 
 void HunspellImpl::cat_result(std::string& result, const std::string& st) {
+  if (result.size() > MAXMORPHRESULT)
+    return;
   if (!st.empty()) {
     if (!result.empty())
       result.append("\n");
